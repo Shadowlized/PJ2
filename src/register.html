@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link href="css/reset.css" rel="stylesheet" type="text/css">
+    <link href="css/register.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <img src="../img/avatar.jpg" alt="">
+        <h1>Sign up for Fisher</h1>
+    </header>
+    <section>
+        <form action='registerAnalyze.php' method='post' role='form'>
+            <h2>Username:</h2>
+            <p>
+                <input type="text" name="username" id="username" required>
+            </p>
+            <h2>Email:</h2>
+            <p>
+                <input type="text" name="email" id="email" required>
+            </p>
+            <h2>Password:</h2>
+            <p>
+                <input type="password" name="password" id="password" required>
+            </p>
+            <h2>Confirm Your Password:</h2>
+            <p>
+                <input type="password" name="confirm-password" id="confirm-password" required>
+            </p>
+            <p>
+                <input type="submit" value="Sign Up" id="sign-up-submit" onclick= signUp()>
+            </p>
+        </form>
+    </section>
+    <footer>
+        Copyright @ 2020 Web Fundamentals. All Rights Reserved. 备案号：19302010013吴逸昕
+    </footer>
+</body>
+<script>
+    function signUp() {
+        let username = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let cPassword = document.getElementById("confirm-password").value;
+        // 检测
+        let patternUser = /[0-9A-Za-z | . | _]{6,18}$/;
+        let booUser = patternUser.test(username);
+        let patternMail = /\w+[@]\w+[.]\w+/;
+        let booMail = patternMail.test(email);
+        let patternPass = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z\\W]{6,18}$/;
+        let booPass = patternPass.test(password);
+        // 反馈
+        if (!booUser)
+            alert("用户名需为6-18位，仅可含大小写字母、数字、\".\"、\"_\"，且不含特殊字符的组合");
+        if (!booMail)
+            alert("邮箱格式不符合规范");
+        if (!booPass)
+            alert("密码需为6-18位，含字母、数字，可含特殊字符的组合");
+        if (password !== cPassword)
+            alert("两次输入的密码不一致");
+        if (booUser && booMail && booPass && (password === cPassword)){
+            window.location.href="registerAnalyze.php";
+        }
+    }
+</script>
+
+</html>
